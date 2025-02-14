@@ -1,9 +1,20 @@
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import GoogleLogin from "../components/shared/GoogleLogin";
+
 const Login = () => {
+  const { signIn } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    signIn(email, password)
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -17,7 +28,7 @@ const Login = () => {
           </p>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit} className="card-body">
+          <form onSubmit={handleSubmit} className="card-body pb-2">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -51,7 +62,16 @@ const Login = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
+            <GoogleLogin />
           </form>
+
+          <p className="text-center pb-2">
+            Don not have an accout?{" "}
+            <Link className="text-blue-400" to="/register">
+              Register
+            </Link>{" "}
+            here
+          </p>
         </div>
       </div>
     </div>

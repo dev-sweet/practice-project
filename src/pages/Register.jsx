@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
+import GoogleLogin from "../components/shared/GoogleLogin";
 
 const Register = () => {
   const [matchedPassword, setMatchedPassword] = useState(true);
@@ -32,7 +34,7 @@ const Register = () => {
           </p>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit} className="card-body">
+          <form onSubmit={handleSubmit} className="card-body pb-2">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -84,7 +86,7 @@ const Register = () => {
 
               {matchedPassword || (
                 <label className="label text-red-500">
-                  Password doesn't match!
+                  Password does not match!
                 </label>
               )}
             </div>
@@ -92,7 +94,16 @@ const Register = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
             </div>
+
+            <GoogleLogin />
           </form>
+          <p className="text-center pb-2">
+            Already have an accout?{" "}
+            <Link className="text-blue-400" to="/login">
+              Login
+            </Link>{" "}
+            here
+          </p>
         </div>
       </div>
     </div>
